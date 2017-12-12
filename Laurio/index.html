@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <ul class="" id="allLists">
+
+    </ul>
+  </body>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+
+      var allListsContainer = $("#allLists");
+      var apiUrl = "https://gr1.compellingsoftware.com/users/me/households";
+      var result = [];
+
+      $.ajax({
+        url: apiUrl,
+        headers: {
+          Authorization: 'Basic ' + window.btoa('john@groshapp.com:Jd1234')
+        },
+        success: function(received){
+          result = received;
+          for(var singleList of result){
+              var listElement = $("<li><a href='/list-content.html'>"+singleList.name+"</a></li>").click(function(){
+                document.cookie = "selectedListID="+ singleList.id +"; expires=Thu, 18 Dec 2018 12:00:00 UTC; path=/";
+              });
+              listElement.appendTo(allListsContainer);
+          }
+        },
+      });
+
+    });
+  </script>
+</html>
