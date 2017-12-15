@@ -14,32 +14,32 @@
     $(document).ready(function(){
 
       var listContent = $("#listContent");
-      var listID = document.cookie;
-      var apiUrl = "https://gr1.compellingsoftware.com/users/me/households/"+listID+"/current";
+    
+      var apiUrl = "https://gr1.compellingsoftware.com/households/me/current?www";
       var result = [];
 
       $.ajax({
         url: apiUrl,
+          dataType: 'json',
+          type: 'get',
+          cache: false,
         headers: {
           Authorization: 'Basic ' + window.btoa('john@groshapp.com:Jd1234')
         },
-        success: function(received){
-          result = received;
-          for(var singleListFieldValue of result){
-            var listItem = $("<li>"+
-              "<p>"+
-                      singleListFieldValue.category
-              +"</p>"
-              +"</li>");
-              for(var groceryItem of singleList.groceries){
-                var groceryListItem = $("<p>" + groceryItem.name + "</p>");
-                groceryListItem.appendTo(listItem);
-              }
-              listItem.appendTo(listContent);
-          }
-        },
+        success: function(data){
+            
+            $(data.id).each(function(index, value){
+                      console.log(data);
+       
+            });
+            
+        
+       
+    }
       });
-
+        
     });
+      
+        
   </script>
 </html>
